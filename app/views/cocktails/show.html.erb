@@ -17,9 +17,12 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div>
-          <% @cocktail.doses.each do |dose| %>
-            <p><%= dose.description %> of <%= dose.ingredient.name %></p>
-          <% end %>
+         <% @cocktail.doses.each do |dose| %>
+          <ul class="list-unstyled list-inline title_article">
+              <li><%= dose.description %> of <%= dose.ingredient.name %> </li>
+              <li> <%= link_to "Delete", dose_path(dose), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %> </li>
+            <% end %>
+          </ul>
         </div>
         <div>
           <%= link_to "Include a new dose", new_cocktail_dose_path(@cocktail), {class: "btn btn-success"}%>
