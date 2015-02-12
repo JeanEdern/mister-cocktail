@@ -2,10 +2,14 @@ class DosesController < ApplicationController
   before_action :find_cocktail, only: [ :new, :create]
 
   def new
-    @dose = Dose.new(cocktail: @cocktail)
+    @dose = @cocktail.doses.build
   end
 
   def create
+    # Ces deux dernières lignes sont équivalents à la version build
+    # @dose  = Dose.new(dose_params)
+    # @dose.cocktail = @cocktail
+
     @dose = @cocktail.doses.build(dose_params)
     if @dose.save
       redirect_to cocktail_path(@cocktail)
