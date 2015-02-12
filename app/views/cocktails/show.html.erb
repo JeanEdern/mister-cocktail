@@ -1,0 +1,26 @@
+
+
+<% if @cocktail.ingredients.count == 0 %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h3>You cocktail does not have any recipe yet, add a dose to complete it !</h3>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div>
+        <% @cocktail.doses.each do |dose| %>
+          <p><%= dose.description %> of <%= dose.ingredient.name %></p>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to "Include a new dose", new_cocktail_dose_path(@cocktail), {class: "btn btn-primary"}%>
+      </div>
+    </div>
+  </div>
+</div>
