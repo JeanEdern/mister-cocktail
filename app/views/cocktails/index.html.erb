@@ -5,7 +5,10 @@
     <div class="col-md-8 col-md-offset-2">
       <% @cocktails.each do |cocktail| %>
         <div class="card">
-          <h3> <%= link_to cocktail.name, cocktail_path(cocktail) %></h3>
+          <ul class="list-inline list-unstyled">
+            <li><%= image_tag cocktail.picture.url(:thumb) %></li>
+            <li> <h3> <%= link_to cocktail.name, cocktail_path(cocktail) %></h3></li>
+          </ul>
         </div>
       <% end %>
       <div>
