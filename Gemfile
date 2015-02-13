@@ -4,6 +4,9 @@ ruby '2.2.0'
 
 gem 'figaro'
 
+gem 'aws-sdk'
+gem 'paperclip'
+
 gem 'rails_12factor', group: :production
 
 gem 'puma',           group: :production
