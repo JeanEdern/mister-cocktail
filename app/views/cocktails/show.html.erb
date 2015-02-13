@@ -1,35 +1,50 @@
 
 
 <% if @cocktail.ingredients.count == 0 %>
-<div class="show">
+  <div class="show">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h2><%= @cocktail.name %></h2>
+            <br><br>
+            <%= image_tag @cocktail.picture.url(:medium) %>
+            <br><br>
+            <h3>You cocktail does not have any recipe yet, add a dose to complete it !</h3>
+            <div>
+              <%= link_to "Include a new dose", new_cocktail_dose_path(@cocktail), {class: "btn btn-success"}%>
+            </div>
+            <br>
+            <%= link_to "Back to the Index", cocktails_path, {class: "btn btn-primary"} %>
+          </div>
+        </div>
+      </div>
+  </div>
+
+<% else %>
+  <div class="show">
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h3>You cocktail does not have any recipe yet, add a dose to complete it !</h3>
+          <div>
+          <h2><%= @cocktail.name %></h2>
+          <%= image_tag @cocktail.picture.url(:medium) %>
+          <br>
+           <% @cocktail.doses.each do |dose| %>
+            <ul class="list-unstyled list-inline title_article">
+                <li><%= dose.description %> of <%= dose.ingredient.name %> </li>
+                <li> <%= link_to "Delete", dose_path(dose), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %> </li>
+              <% end %>
+            </ul>
+          </div>
+          <div>
+            <%= link_to "Include a new dose", new_cocktail_dose_path(@cocktail), {class: "btn btn-success"}%>
+          </div>
+          <br>
+          <%= link_to "Back to the Index", cocktails_path, {class: "btn btn-primary"} %>
         </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-<div class="show">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div>
-         <% @cocktail.doses.each do |dose| %>
-          <ul class="list-unstyled list-inline title_article">
-              <li><%= dose.description %> of <%= dose.ingredient.name %> </li>
-              <li> <%= link_to "Delete", dose_path(dose), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %> </li>
-            <% end %>
-          </ul>
-        </div>
-        <div>
-          <%= link_to "Include a new dose", new_cocktail_dose_path(@cocktail), {class: "btn btn-success"}%>
-        </div>
-        <br>
-        <%= link_to "Back to the Index", cocktails_path, {class: "btn btn-primary"} %>
       </div>
     </div>
   </div>
-</div>
+<% end %>
+
+
